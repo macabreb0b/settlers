@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-class Tile
-
+class Resource < Tile
   FREQ = {
     brick: 3,
     wood: 4,
@@ -53,17 +50,4 @@ class Tile
     return "⛄" if robber
     SYMBOLS[number] || " "
   end
-
-  def neighboring(klass)
-    y, x = pos
-    neighbors = []
-    (-1..1).to_a.each do |ydiff|
-      (-1..1).to_a.each do |xdiff|
-        next if xdiff == 0 && ydiff == 0
-        neighbors << @board[[y + ydiff, x + xdiff]]
-      end
-    end
-    neighbors.select!  { |neighbor| neighbor.is_a?(klass) }.uniq
-  end
-
 end

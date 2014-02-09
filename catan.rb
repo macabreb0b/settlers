@@ -17,12 +17,33 @@ if $PROGRAM_NAME == __FILE__
   g = Game.new(p1, p2, p3, p4)
 
   g.show
-  puts p1.color
-  p1.build_settlement("H2")
 
-  # p1.settlements
+  g.play
+
+  # p1.build_settlement("H2")
+ #  p1.build_road(["H2", "G3"])
+ #  p1.build_road(["G3", "F3"])
+ #
+ #  p2.build_settlement("F3")
+ #    g.show
+ #  p1.build_road(["F3", "E3"])
 
 
-  g.show
+  # x = g.board.find_all(Intersection).find { |ixs| ixs.number == "G2" }
+#
+#   p x.neighboring(Settlement)
+#   p x.neighboring(Intersection)
+#   p x.neighboring(Tile)
+#
+#   k1 = g.board.intersection_at("K1")
+#
+#   p k1.neighboring(Intersection)
+#
+#   g.show
+#   g.board.rds
+
+  # g.board.map.each do |row|
+  #   p row
+  # end
 
 end

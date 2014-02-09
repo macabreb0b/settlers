@@ -1,5 +1,6 @@
 class DevCard
-  CARDS = {
+  CARD_METHODS = {
+
 
   }
   CARD_FREQS = {
