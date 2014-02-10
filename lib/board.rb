@@ -46,9 +46,11 @@ class Board
 
   def initialize(game)
     @map = build_map
-   # @dev_cards = DevCard::CARDS.dup.shuffle
     place_tiles
     @rds = build_roads
+
+    @longest_road = 4
+    @largest_army = 2
   end
 
   def roll
@@ -111,13 +113,14 @@ class Board
   end
 
   def payout(roll)
-    paying_tiles = find_all(Tile).select! do |tile|
-      tile.number == roll && !tile.robber
-    end
+    settlements = find_all(Settlement)
 
-    paying_tiles.each do |tile|
-      resource = tile.resource
-      tile.neighboring(Settlement).each { |settlement| settlement.pay(resource) }
+    settlements.each do |settlement|
+      settlement.neighboring(Tile).each do |tile|
+        if tile.number == roll && tile.robber == false
+          settlement.pay(tile.resource)
+        end
+      end
     end
   end
 
@@ -188,12 +191,13 @@ class Board
         row.each_with_index do |tile, cidx|
           if tile.is_a?(Intersection)
             neighbors = tile.neighboring(Intersection)
+
             neighbors.each do |neighbor|
+
               name1 = tile.number
               name2 = neighbor.number
-              puts "#{name1}, #{name2}"
+
               unless roads.any? { |road| road.name.include?(name1) && road.name.include?(name2) }
-                puts "building road for #{ridx}"
                 symbol = "?"
                 if ridx.odd?
                   symbol = "❘"
@@ -202,6 +206,7 @@ class Board
                 else
                   symbol = ( name1[1].to_i == name2[1].to_i ? "⟍" : "⟋" )
                 end
+
                 roads << Road.new([tile, neighbor], symbol)
               end
             end
@@ -230,12 +235,3 @@ class Board
 
 
 end
-# str = '  XX
-#   /  \  /
-# XX DD XX
-# || 04 ||
-# XX    XX
-#   \  /  \
-#    XX
-#   '
-# puts str

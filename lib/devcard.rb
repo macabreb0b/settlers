@@ -1,8 +1,4 @@
 class DevCard
-  CARD_METHODS = {
-
-
-  }
   CARD_FREQS = {
     knight: 14,
     victory: 5,
@@ -10,4 +6,5 @@ class DevCard
     year_of_plenty: 2,
     road_building: 2
   }
+
 end

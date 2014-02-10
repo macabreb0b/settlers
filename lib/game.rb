@@ -1,6 +1,6 @@
 class Game
 
-  attr_reader :board
+  attr_reader :board, :players
 
   def initialize(*players)
     @board = Board.new(self)
